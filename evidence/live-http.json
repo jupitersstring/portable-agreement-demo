@@ -1,0 +1,59 @@
+{
+  "origin": "https://jupitersstring.github.io/portable-agreement-demo/",
+  "checks": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "content_type": "text/html",
+      "sha256": "206e00b8b56714828b8d4583edf33be5536db22f07d24978ad4774bad6889bba",
+      "matches_published_source": true,
+      "csp_http_header": null,
+      "nosniff": null
+    },
+    {
+      "path": "site/index.html",
+      "status": 200,
+      "content_type": "text/html",
+      "sha256": "e816c08aa218f0274cbb52ff297e9a11dd3c9dce8069aecec5d17fabadc46d7c",
+      "matches_published_source": true,
+      "csp_http_header": null,
+      "nosniff": null
+    },
+    {
+      "path": "site/app.mjs",
+      "status": 200,
+      "content_type": "text/javascript",
+      "sha256": "22d4e84cb136fb0c0491eafd68a3fe959f5dafc63bd7f57ea7b7666bf79b965c",
+      "matches_published_source": true,
+      "csp_http_header": null,
+      "nosniff": null
+    },
+    {
+      "path": "site/protocol.mjs",
+      "status": 200,
+      "content_type": "text/javascript",
+      "sha256": "d69829c282108ed8bdc53f4ea63e63dcb16722168c6ff4ee4472f002900844dc",
+      "matches_published_source": true,
+      "csp_http_header": null,
+      "nosniff": null
+    },
+    {
+      "path": "site/style.css",
+      "status": 200,
+      "content_type": "text/css",
+      "sha256": "d1e79adb9ed8749a4b7584e9e216835cfd006fc053b0b2fa8459f03c771928ba",
+      "matches_published_source": true,
+      "csp_http_header": null,
+      "nosniff": null
+    },
+    {
+      "path": "show-hn-demo.zip",
+      "status": 200,
+      "content_type": "application/x-zip-compressed",
+      "sha256": "9c647586591bcdc95d2bd397f0df2441834ba28b9e0e8d4252a3b7fe6f20dd4b",
+      "matches_published_source": true,
+      "csp_http_header": null,
+      "nosniff": null
+    }
+  ]
+}
