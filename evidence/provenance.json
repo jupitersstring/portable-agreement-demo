@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-25",
+  "python": "3.14.6",
+  "cryptography": "50.0.2",
+  "node": "v26.8.2",
+  "reference_commit": "658a7c867ab156dd446e1cef05b08baf9ebd6a33",
+  "reference_source_sha256": {
+    "covenant_agent/open_work.py": "057bc5233576c5c13bf4a0702a9d49ca60820ff7358b6b6ca66c4779961bb652",
+    "covenant_agent/codec.py": "fb3e69d1c8210fc0120dd240f1b0490d7357d4f6b9626bfb83c5b517a5eb177f"
+  },
+  "browser_download_sha256": "8ad57d84212ed2677fd518547f8d465cc0ccf6763d9139b31694e8e17708d19e"
+}

@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-25",
+  "automated_tests": {
+    "protocol_and_interoperability": {
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    "loopback_http_security": {
+      "passed": 3,
+      "failed": 0
+    }
+  },
+  "browser": {
+    "engine": "Codex in-app browser",
+    "observed_viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "passed": [
+      "fresh start with temporary keys",
+      "customer proposal is not bound until separate provider acceptance",
+      "two signed-price tampering cases rejected",
+      "90-to-130 revision retains original and requires fresh acceptance",
+      "delivery and dispute event links",
+      "actual JSON download",
+      "second-tab verification with independent fingerprint",
+      "keyless import is read-only",
+      "changed terms refused without replacing prior record",
+      "optional evidence inclusion and evidence hash refusal",
+      "reset and Undo restore prior record and signing capability",
+      "HTML-like terms rendered as inert text, zero image elements",
+      "no captured console errors"
+    ],
+    "mobile": "not qualified: requested 390-pixel viewport override did not change observed 1280-pixel layout"
+  },
+  "deployment": "local only; public HTTPS deployment not performed",
+  "main_repository": "no source changes, commits or pushes made by this demo task"
+}

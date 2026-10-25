@@ -1,0 +1,111 @@
+{
+  "format": "portable-commitment-demo/0.1",
+  "selected": "0c5e237c3a6b8d9c9d7411accdd2b6c54169c104875fb3722b9dee6cd76fd12f",
+  "agreements": [
+    {
+      "body": {
+        "profile": "covenant-bilateral/0.3",
+        "terms": {
+          "version": "covenant-work-order/0.3",
+          "task": "Produce a research report on battery recycling. Include three publicly cited sources, a one-page summary, and a table comparing costs. Delivery is a claim; the customer reviews quality separately.",
+          "quantity": 90,
+          "payment": {
+            "identifier": "MANUAL",
+            "network": "demo-only",
+            "asset": "demo-credit",
+            "unit": "credits",
+            "payee": "36de5b48c0a40f4e33e373b69ccb27c144dcd74fc041bea3315a920fc69995bd",
+            "adapter": null,
+            "instructions": null
+          },
+          "nonce": "57f6798a1765203a60ba6e58df2edc509538514496c10d2f060f40a6cae290f6",
+          "deadline": 1793026080,
+          "clock": "OWNER_ADOPTED_UNIX_SECONDS",
+          "context": null
+        },
+        "customer": "4cf5544e209bb23120437d5b49a9e7efded50fd2899a97beea1f912a0af0b348",
+        "provider": "36de5b48c0a40f4e33e373b69ccb27c144dcd74fc041bea3315a920fc69995bd"
+      },
+      "id": "512a214fa673ed41b909981abd906dbb66852e46ffebe84295fa3c4923a108e8",
+      "assents": [
+        {
+          "signer": "4cf5544e209bb23120437d5b49a9e7efded50fd2899a97beea1f912a0af0b348",
+          "signature": "acd860b68b43b4b4d6d5c4556bbc339a2b1e64373c215ab9fbf05bc8c125178084d3f8dfa1dbb10b6d2f599e85051cf34cbfc768d39395f618a2682ea69bcc0a"
+        },
+        {
+          "signer": "36de5b48c0a40f4e33e373b69ccb27c144dcd74fc041bea3315a920fc69995bd",
+          "signature": "bb2923cb5a73a08f698ab7720c29bcb57bf31c569d45879f719f8f2048d66dcaed1a050526356e25fdc8add26928e3c566355397c999fa06f4c776a5e4f98b04"
+        }
+      ],
+      "events": [],
+      "execution_authorized": false,
+      "funds_reserved": false
+    },
+    {
+      "body": {
+        "profile": "covenant-bilateral/0.3",
+        "terms": {
+          "version": "covenant-work-order/0.3",
+          "task": "Produce a research report on battery recycling. Include three publicly cited sources, a one-page summary, and a table comparing costs. Delivery is a claim; the customer reviews quality separately.",
+          "quantity": 130,
+          "payment": {
+            "identifier": "MANUAL",
+            "network": "demo-only",
+            "asset": "demo-credit",
+            "unit": "credits",
+            "payee": "36de5b48c0a40f4e33e373b69ccb27c144dcd74fc041bea3315a920fc69995bd",
+            "adapter": null,
+            "instructions": null
+          },
+          "nonce": "3b49cf689217815523e187e158351117fbe85e0773555ca95eefd47d7a5f0dfc",
+          "deadline": 1793026080,
+          "clock": "OWNER_ADOPTED_UNIX_SECONDS",
+          "context": {
+            "amends": "512a214fa673ed41b909981abd906dbb66852e46ffebe84295fa3c4923a108e8",
+            "rule": "Fresh assent binds this proposal. Prior records and accrued obligations are not automatically released."
+          }
+        },
+        "customer": "4cf5544e209bb23120437d5b49a9e7efded50fd2899a97beea1f912a0af0b348",
+        "provider": "36de5b48c0a40f4e33e373b69ccb27c144dcd74fc041bea3315a920fc69995bd"
+      },
+      "id": "0c5e237c3a6b8d9c9d7411accdd2b6c54169c104875fb3722b9dee6cd76fd12f",
+      "assents": [
+        {
+          "signer": "4cf5544e209bb23120437d5b49a9e7efded50fd2899a97beea1f912a0af0b348",
+          "signature": "a5b24f8babe353796fa38594a8c03bdc5833d357eed1ec9cb916df2f2b5dde08d64db6d343829d079befc7891e7b71078724fdfba52f5a3490f85dfd3ad4c90d"
+        },
+        {
+          "signer": "36de5b48c0a40f4e33e373b69ccb27c144dcd74fc041bea3315a920fc69995bd",
+          "signature": "7802e0d7b5ccdb1b9946271f8f3bfadeae3098cff4cf56807765e4401808bae89c8f26182467cd94a65092c48c7d02e9b4df55063214847f4cb66a1c2623ae09"
+        }
+      ],
+      "events": [
+        {
+          "body": {
+            "agreement": "0c5e237c3a6b8d9c9d7411accdd2b6c54169c104875fb3722b9dee6cd76fd12f",
+            "previous": "0c5e237c3a6b8d9c9d7411accdd2b6c54169c104875fb3722b9dee6cd76fd12f",
+            "action": "DELIVERY_CLAIM",
+            "evidence": "421c049a6efa1ad84926ca38a20dceee1ab88f77c0b5263dbf8683208dcd306b",
+            "at": 1792939700
+          },
+          "signer": "36de5b48c0a40f4e33e373b69ccb27c144dcd74fc041bea3315a920fc69995bd",
+          "signature": "6cb25a6e3e4fab89ad0cd608fa07b977e3313fa39a7c96f7cc42275069e54484ca5afe84c05735b68cbe9040164b3d1038417d01e8c5897a7962742c0b59a20d"
+        },
+        {
+          "body": {
+            "agreement": "0c5e237c3a6b8d9c9d7411accdd2b6c54169c104875fb3722b9dee6cd76fd12f",
+            "previous": "c47b4d870ff791214b23143f35113c52a24af2281d2b359d41735bfdc706cd4f",
+            "action": "DISPUTE",
+            "evidence": "421c049a6efa1ad84926ca38a20dceee1ab88f77c0b5263dbf8683208dcd306b",
+            "at": 1792939700
+          },
+          "signer": "4cf5544e209bb23120437d5b49a9e7efded50fd2899a97beea1f912a0af0b348",
+          "signature": "d744e4c3b2b87fe6c40e25bb7957307c390fcd6c07106bf8fbaff4e509c6d1f1fbaadeec4607ea996e86ad6b7ce7a98175296046107a4092fa0987eb6b36e40c"
+        }
+      ],
+      "execution_authorized": false,
+      "funds_reserved": false
+    }
+  ],
+  "evidence": []
+}
