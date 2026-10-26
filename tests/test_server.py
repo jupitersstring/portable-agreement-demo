@@ -17,7 +17,7 @@ class DemoHTTPTests(unittest.TestCase):
             conn.request(method,path,headers={} if host is None else {'Host':host});r=conn.getresponse();return r.status,dict(r.getheaders()),r.read()
         finally:conn.close()
     def test_real_page_and_modules_are_served_without_network_apis(self):
-        status,headers,body=self.get();self.assertEqual(status,200);self.assertIn(b'A verifiable agreement',body)
+        status,headers,body=self.get();self.assertEqual(status,200);self.assertIn(b'Try a deal between two agents.',body)
         self.assertIn("connect-src 'none'",headers['Content-Security-Policy']);self.assertEqual(headers['Cache-Control'],'no-store')
         for path in ('/app.mjs','/protocol.mjs','/examples.mjs','/style.css'):
             self.assertEqual(self.get(path)[0],200)
