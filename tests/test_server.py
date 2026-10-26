@@ -19,9 +19,9 @@ class DemoHTTPTests(unittest.TestCase):
     def test_real_page_and_modules_are_served_without_network_apis(self):
         status,headers,body=self.get();self.assertEqual(status,200);self.assertIn(b'Try a deal between two agents.',body)
         self.assertIn("connect-src 'none'",headers['Content-Security-Policy']);self.assertEqual(headers['Cache-Control'],'no-store')
-        for path in ('/app.mjs','/protocol.mjs','/examples.mjs','/style.css'):
+        for path in ('/app.mjs','/protocol.mjs','/examples.mjs','/style.css','/advanced.html','/advanced.css','/advanced-app.mjs','/advanced-protocol.mjs'):
             self.assertEqual(self.get(path)[0],200)
-        for path in ('/site/','/site/app.mjs','/README.html','/EXAMPLES_REFRESH.html','/LICENSE'):
+        for path in ('/site/','/site/app.mjs','/site/advanced.html','/site/advanced-protocol.mjs','/README.html','/EXAMPLES_REFRESH.html','/LICENSE'):
             self.assertEqual(self.get(path)[0],200)
         help_status,help_headers,help_body=self.get('/README.html')
         self.assertIn("script-src 'none'",help_headers['Content-Security-Policy'])
@@ -37,6 +37,6 @@ class DemoHTTPTests(unittest.TestCase):
         self.assertEqual(self.get('/',host='attacker.example')[0],403)
         self.assertEqual(self.get('/',method='POST')[0],501)
     def test_public_assets_contain_no_network_clients_or_browser_storage(self):
-        code=''.join((ROOT/'site'/name).read_text() for name in ('app.mjs','protocol.mjs','examples.mjs'))
+        code=''.join(path.read_text() for path in sorted((ROOT/'site').glob('*.mjs')))
         for call in ('fetch(', 'XMLHttpRequest','localStorage','sessionStorage','sendBeacon','innerHTML'):
             self.assertNotIn(call,code)

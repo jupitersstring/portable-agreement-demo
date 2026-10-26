@@ -9,7 +9,11 @@ ROOT=Path(__file__).resolve().parent/'site'
 ASSETS={'/':('index.html','text/html; charset=utf-8'),'/index.html':('index.html','text/html; charset=utf-8'),
         '/style.css':('style.css','text/css; charset=utf-8'),'/app.mjs':('app.mjs','text/javascript; charset=utf-8'),
         '/protocol.mjs':('protocol.mjs','text/javascript; charset=utf-8'),
-        '/examples.mjs':('examples.mjs','text/javascript; charset=utf-8')}
+        '/examples.mjs':('examples.mjs','text/javascript; charset=utf-8'),
+        '/advanced.html':('advanced.html','text/html; charset=utf-8'),
+        '/advanced.css':('advanced.css','text/css; charset=utf-8'),
+        '/advanced-app.mjs':('advanced-app.mjs','text/javascript; charset=utf-8'),
+        '/advanced-protocol.mjs':('advanced-protocol.mjs','text/javascript; charset=utf-8')}
 # Exact aliases and named public help artifacts keep local navigation usable.
 # No user path, directory listing, .git data or owner configuration is served.
 ASSETS.update({'/site'+route:value for route,value in list(ASSETS.items())})
