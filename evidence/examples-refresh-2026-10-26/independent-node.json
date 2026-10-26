@@ -1,0 +1,54 @@
+{
+  "results": [
+    {
+      "id": "fd3697a4362f68d708441be77b36f62d69a526e77d6885e66a88e3da535bfa2c",
+      "status": "BOUND",
+      "head": "fd3697a4362f68d708441be77b36f62d69a526e77d6885e66a88e3da535bfa2c",
+      "approved": [
+        "0cb2abb6b905a01a288d54d686e51fadf927ea369fb18b4048d35c1c12fd45a0",
+        "cf54211c78abcd9e94c1996e0de2afefaf3e01ba67b8317d2ca231bb509bf599"
+      ],
+      "events": 0,
+      "payment_verified": false,
+      "delivery_verified": false,
+      "funds_reserved": false,
+      "execution_authorized": false,
+      "chain_required": false
+    },
+    {
+      "id": "770dde7ec723cc973f644fdb7302bfa48a0a20ca658aa7c7f3e73003d54e99b9",
+      "status": "BOUND",
+      "head": "075bd87387ddf120a988c66d33c3cb6b72eb0636df1f3871d169544fbda2d0df",
+      "approved": [
+        "0cb2abb6b905a01a288d54d686e51fadf927ea369fb18b4048d35c1c12fd45a0",
+        "cf54211c78abcd9e94c1996e0de2afefaf3e01ba67b8317d2ca231bb509bf599"
+      ],
+      "events": 2,
+      "payment_verified": false,
+      "delivery_verified": false,
+      "funds_reserved": false,
+      "execution_authorized": false,
+      "chain_required": false
+    }
+  ],
+  "selected": {
+    "id": "770dde7ec723cc973f644fdb7302bfa48a0a20ca658aa7c7f3e73003d54e99b9",
+    "status": "BOUND",
+    "head": "075bd87387ddf120a988c66d33c3cb6b72eb0636df1f3871d169544fbda2d0df",
+    "approved": [
+      "0cb2abb6b905a01a288d54d686e51fadf927ea369fb18b4048d35c1c12fd45a0",
+      "cf54211c78abcd9e94c1996e0de2afefaf3e01ba67b8317d2ca231bb509bf599"
+    ],
+    "events": 2,
+    "payment_verified": false,
+    "delivery_verified": false,
+    "funds_reserved": false,
+    "execution_authorized": false,
+    "chain_required": false
+  },
+  "includedEvidence": 2,
+  "identity": "KEY_SIGNATURES_ONLY",
+  "payment_verified": false,
+  "delivery_quality_verified": false,
+  "independent_fingerprint_supplied": true
+}

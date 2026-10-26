@@ -1,0 +1,120 @@
+{
+  "format": "portable-commitment-demo/0.1",
+  "selected": "770dde7ec723cc973f644fdb7302bfa48a0a20ca658aa7c7f3e73003d54e99b9",
+  "agreements": [
+    {
+      "body": {
+        "profile": "covenant-bilateral/0.3",
+        "terms": {
+          "version": "covenant-work-order/0.3",
+          "task": "Translate my 500-word product page from English to Spanish. Preserve product numbers and headings, supply editable text, and flag uncertain technical terms. The customer separately reviews accuracy.",
+          "quantity": 30,
+          "payment": {
+            "identifier": "MANUAL",
+            "network": "demo-only",
+            "asset": "demo-credit",
+            "unit": "credits",
+            "payee": "cf54211c78abcd9e94c1996e0de2afefaf3e01ba67b8317d2ca231bb509bf599",
+            "adapter": null,
+            "instructions": null
+          },
+          "nonce": "179b6c3e019d3ba1b6ee9607149634b0abe74632cf03a17ef94566fdbee0150a",
+          "deadline": 1793127780,
+          "clock": "OWNER_ADOPTED_UNIX_SECONDS",
+          "context": null
+        },
+        "customer": "0cb2abb6b905a01a288d54d686e51fadf927ea369fb18b4048d35c1c12fd45a0",
+        "provider": "cf54211c78abcd9e94c1996e0de2afefaf3e01ba67b8317d2ca231bb509bf599"
+      },
+      "id": "fd3697a4362f68d708441be77b36f62d69a526e77d6885e66a88e3da535bfa2c",
+      "assents": [
+        {
+          "signer": "0cb2abb6b905a01a288d54d686e51fadf927ea369fb18b4048d35c1c12fd45a0",
+          "signature": "77a562727791bf9cee9fcdf957656e68aa96a1d3a019fd9b1b0dad6b10eee67a81e3717c9e7f6d4c708760ecb41094973f7266caf8fa77c32ce3ac8f2489080c"
+        },
+        {
+          "signer": "cf54211c78abcd9e94c1996e0de2afefaf3e01ba67b8317d2ca231bb509bf599",
+          "signature": "d591e4ce2068d37807f4a25a8d5e2f536b99ae8a85e999183e2ddea94e95521e05abc2dd610a109352ea7a4fee3609750a0075b59c1d2b3d9c3614dcb212320e"
+        }
+      ],
+      "events": [],
+      "execution_authorized": false,
+      "funds_reserved": false
+    },
+    {
+      "body": {
+        "profile": "covenant-bilateral/0.3",
+        "terms": {
+          "version": "covenant-work-order/0.3",
+          "task": "Review my sample supplier dataset. Deliver a table of missing fields, duplicate rows and stated date ranges, with a short reproducible method. Record uncertainty; do not claim legal title or external verification.",
+          "quantity": 60,
+          "payment": {
+            "identifier": "MANUAL",
+            "network": "demo-only",
+            "asset": "demo-credit",
+            "unit": "credits",
+            "payee": "cf54211c78abcd9e94c1996e0de2afefaf3e01ba67b8317d2ca231bb509bf599",
+            "adapter": null,
+            "instructions": null
+          },
+          "nonce": "8ecd4ac9ec053f0834f17d9db3642f67d96dc6e5fd0329c617e06943105e3d0d",
+          "deadline": 1793127780,
+          "clock": "OWNER_ADOPTED_UNIX_SECONDS",
+          "context": {
+            "amends": "fd3697a4362f68d708441be77b36f62d69a526e77d6885e66a88e3da535bfa2c",
+            "rule": "Fresh assent binds this proposal. Prior records and accrued obligations are not automatically released."
+          }
+        },
+        "customer": "0cb2abb6b905a01a288d54d686e51fadf927ea369fb18b4048d35c1c12fd45a0",
+        "provider": "cf54211c78abcd9e94c1996e0de2afefaf3e01ba67b8317d2ca231bb509bf599"
+      },
+      "id": "770dde7ec723cc973f644fdb7302bfa48a0a20ca658aa7c7f3e73003d54e99b9",
+      "assents": [
+        {
+          "signer": "0cb2abb6b905a01a288d54d686e51fadf927ea369fb18b4048d35c1c12fd45a0",
+          "signature": "43b82d0d302467d99c1973abde7223c9f8081e3f9017983a6a45edd0b9f5453b272a9e19e3a506087dc6968e476bfc1b4fe03eff614485890cf3c1d28a220c04"
+        },
+        {
+          "signer": "cf54211c78abcd9e94c1996e0de2afefaf3e01ba67b8317d2ca231bb509bf599",
+          "signature": "1537ae310a429190c02b12430fdae08b51a4927b89176aa755d12b6e15f9c86c9f8cc2068d9004175d31fc1d0943842ede150d4f2f5a0077a5c24fbfc59edd0a"
+        }
+      ],
+      "events": [
+        {
+          "body": {
+            "agreement": "770dde7ec723cc973f644fdb7302bfa48a0a20ca658aa7c7f3e73003d54e99b9",
+            "previous": "770dde7ec723cc973f644fdb7302bfa48a0a20ca658aa7c7f3e73003d54e99b9",
+            "action": "DELIVERY_CLAIM",
+            "evidence": "983e3f37b9574c8468f3503b4640ac4c997a6d1f2ffb8713a17c1673ed2960fd",
+            "at": 1793041429
+          },
+          "signer": "cf54211c78abcd9e94c1996e0de2afefaf3e01ba67b8317d2ca231bb509bf599",
+          "signature": "ca14d5160843534bf619fa278dd9c5fdf2af0120601069a6f484ca9bb0f8938e3a276c318de4b98ae95acb34bc2001f6c34a6ae8d0a8e3f99572b5aa9408df09"
+        },
+        {
+          "body": {
+            "agreement": "770dde7ec723cc973f644fdb7302bfa48a0a20ca658aa7c7f3e73003d54e99b9",
+            "previous": "15448ebe220d21fcf3af12d967e6b4988092b75faf063d397f86c892b0d8fecc",
+            "action": "DISPUTE",
+            "evidence": "8b6f98cb9e8d2bb1bc205aef0717e89e8212cc716572d4299c166dbf654812b4",
+            "at": 1793041429
+          },
+          "signer": "0cb2abb6b905a01a288d54d686e51fadf927ea369fb18b4048d35c1c12fd45a0",
+          "signature": "d74bc2d190bdafa6d4ec426a18a539d84a8f23c43b5891dbc1eb8e9a172d6138753b7746c82f542c54a07cb796c0a18d7312578df5f7939a7ac281908cfd0106"
+        }
+      ],
+      "execution_authorized": false,
+      "funds_reserved": false
+    }
+  ],
+  "evidence": [
+    {
+      "sha256": "983e3f37b9574c8468f3503b4640ac4c997a6d1f2ffb8713a17c1673ed2960fd",
+      "text": "<img src=x onerror=\"globalThis.forbiddenExampleEffect=1\"> SYNTHETIC unverified delivery claim"
+    },
+    {
+      "sha256": "8b6f98cb9e8d2bb1bc205aef0717e89e8212cc716572d4299c166dbf654812b4",
+      "text": "SYNTHETIC customer dispute: the reproducible method is missing."
+    }
+  ]
+}

@@ -6,8 +6,21 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import * as P from '../site/protocol.mjs';
+import {examples,example} from '../site/examples.mjs';
 const python=process.env.AGREEMENT_REFERENCE_PYTHON;
 const bridge=fileURLToPath(new URL('./reference_bridge.py',import.meta.url));
+test('human examples are inert valid terms; editing a chosen form cannot mutate a preset',async()=>{
+ const customer=await P.identity(),provider=await P.identity();
+ for(const [name,preset] of Object.entries(examples)){
+  const draft=example(name);draft.task='Customer-specific draft';
+  assert.equal(examples[name].task,preset.task);
+  let order=await P.draft({task:preset.task,customer:customer.public,provider:provider.public,quantity:preset.quantity,deadline:1900000000,orderNonce:'a'.repeat(64)});
+  order=await P.assent(order,customer);assert.equal((await P.inspect(order,order.id)).status,'PROPOSED');
+  order=await P.assent(order,provider);assert.equal((await P.inspect(order,order.id)).status,'BOUND');
+  assert.equal(order.body.terms.task,preset.task);assert.equal(order.body.terms.quantity,preset.quantity);
+ }
+ assert.throws(()=>example('constructor'),/UNKNOWN_EXAMPLE/);
+});
 async function made(){const c=await P.identity(),p=await P.identity();let o=await P.draft({task:'SYNTHETIC: deliver a three-source research report.',customer:c.public,provider:p.public,quantity:90,deadline:1900000000,orderNonce:'a'.repeat(64)});o=await P.assent(o,c);return {c,p,o};}
 async function bound(){const x=await made();x.o=await P.assent(x.o,x.p);return x;}
 const code=name=>error=>error.code===name;

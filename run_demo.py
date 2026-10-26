@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Serve only the browser demo assets on loopback. No backend keys or APIs."""
+"""Serve allowlisted demo/public-help assets on loopback. No keys or APIs."""
 import argparse
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
@@ -8,8 +8,28 @@ from urllib.parse import urlsplit
 ROOT=Path(__file__).resolve().parent/'site'
 ASSETS={'/':('index.html','text/html; charset=utf-8'),'/index.html':('index.html','text/html; charset=utf-8'),
         '/style.css':('style.css','text/css; charset=utf-8'),'/app.mjs':('app.mjs','text/javascript; charset=utf-8'),
-        '/protocol.mjs':('protocol.mjs','text/javascript; charset=utf-8')}
+        '/protocol.mjs':('protocol.mjs','text/javascript; charset=utf-8'),
+        '/examples.mjs':('examples.mjs','text/javascript; charset=utf-8')}
+# Exact aliases and named public help artifacts keep local navigation usable.
+# No user path, directory listing, .git data or owner configuration is served.
+ASSETS.update({'/site'+route:value for route,value in list(ASSETS.items())})
+for name in ('README.html','REVIEW.html','LIVE.html','EXAMPLES_REFRESH.html'):
+    ASSETS['/'+name]=('../'+name,'text/html; charset=utf-8')
+ASSETS['/LICENSE']=('../LICENSE','text/plain; charset=utf-8')
+for name in ('show-hn-demo.zip','static-site.zip'):
+    ASSETS['/'+name]=('../'+name,'application/zip')
+for name in ('browser-export.json','live-browser-export.json','live-http.json','live-python-results.json',
+             'provenance.json','python-reference-results.json','test-summary.json'):
+    ASSETS['/evidence/'+name]=('../evidence/'+name,'application/json; charset=utf-8')
+for name in ('desktop.jpg','preview.jpg','live-preview.jpg'):
+    ASSETS['/evidence/'+name]=('../evidence/'+name,'image/jpeg')
+for name in ('results.json','browser-export.json','independent-node.json'):
+    ASSETS['/evidence/examples-refresh-2026-10-26/'+name]=('../evidence/examples-refresh-2026-10-26/'+name,'application/json; charset=utf-8')
+for name in ('protocol-tests.log','server-tests.log'):
+    ASSETS['/evidence/examples-refresh-2026-10-26/'+name]=('../evidence/examples-refresh-2026-10-26/'+name,'text/plain; charset=utf-8')
+ASSETS['/evidence/protocol-tests.txt']=('../evidence/protocol-tests.txt','text/plain; charset=utf-8')
 CSP="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+HELP_CSP="default-src 'none'; script-src 'none'; style-src 'unsafe-inline'; connect-src 'none'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
 
 class Handler(BaseHTTPRequestHandler):
     server_version='LocalAgreementDemo'
@@ -27,7 +47,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-Type',kind)
         self.send_header('Content-Length',str(len(data)))
-        self.send_header('Content-Security-Policy',CSP)
+        self.send_header('Content-Security-Policy',HELP_CSP if name.startswith('../') and kind.startswith('text/html') else CSP)
         self.send_header('X-Content-Type-Options','nosniff')
         self.send_header('Referrer-Policy','no-referrer')
         self.send_header('Cache-Control','no-store')

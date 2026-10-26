@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "fresh demo has visible human needs and no ready signature",
+      "status": "PASS"
+    },
+    {
+      "name": "preset edits only draft fields and its immediate restore preserves custom text",
+      "status": "PASS"
+    },
+    {
+      "name": "offer and distinct provider acceptance bind the reviewed terms",
+      "status": "PASS"
+    },
+    {
+      "name": "tampering refuses and an example change cannot reuse the old approvals",
+      "status": "PASS"
+    },
+    {
+      "name": "delivery and dispute are inert claims with safe optional evidence disclosure",
+      "status": "PASS"
+    },
+    {
+      "name": "independent Node process verifies actual browser-generated signatures",
+      "status": "PASS"
+    },
+    {
+      "name": "second-tab wrong-pin refusal preserves state and exact import is read-only",
+      "status": "PASS"
+    },
+    {
+      "name": "public examples expose copy controls and preserve exact command bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "clipboard refusal selects text and never reports a false copy",
+      "status": "PASS"
+    },
+    {
+      "name": "actual mobile viewport retains visible essentials without horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "local help retains its classical style and source download has all current assets",
+      "status": "PASS"
+    },
+    {
+      "name": "implementation guide renders as a standalone HTML artifact",
+      "status": "PASS"
+    }
+  ],
+  "page_errors": [],
+  "unexpected_external_requests": [],
+  "browser": "Temporary official Playwright Chromium headless shell",
+  "viewports": [
+    {
+      "width": 1280,
+      "height": 900
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "scope": "Local browser UI, actual signatures, exact export, independent Node verification, read-only import, clipboard controls and emulated viewport. Not live deployment, real phone, payment or independent operators."
+}

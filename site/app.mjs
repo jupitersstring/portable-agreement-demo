@@ -1,27 +1,33 @@
 import * as P from './protocol.mjs';
+import {example} from './examples.mjs';
 const $=id=>document.getElementById(id);
-const nodes={};for(const id of ['reset','undo','message','offer-form','task','quantity','deadline','customer-key','provider-key','propose','mode','signed-status','review','accept','tamper','tamper-result','evidence','deliver','dispute','receipt','evidence-note','record-summary','fingerprint','timeline','include-content','export','download','export-output','export-details','import-file','import-json','expected-id','import','import-result'])nodes[id]=$(id);
-let state={roles:null,orders:[],selected:null,evidence:new Map(),imported:false},backup=null,busy=false,prepared=null;
+const nodes={};for(const id of ['reset','undo','message','next-action','restore-draft','copy-fingerprint','copy-record','offer-form','task','quantity','deadline','customer-key','provider-key','propose','mode','signed-status','review','accept','tamper','tamper-result','evidence','deliver','dispute','receipt','evidence-note','record-summary','fingerprint','timeline','include-content','export','download','export-output','export-details','import-file','import-json','expected-id','import','import-result'])nodes[id]=$(id);
+let state={roles:null,orders:[],selected:null,evidence:new Map(),imported:false},backup=null,draftBackup=null,busy=false,prepared=null;
 const friendly={ASCII_PROFILE:'This profile uses printable ASCII terms. Keep the work description to one paragraph with ordinary ASCII punctuation.',SIGNATURE:'A carried signature does not approve these bytes. Request the original signed record or fresh acceptance.',OPEN_WORK_CHANGED:'The terms no longer match their signed fingerprint. Original acceptance cannot be carried across a price or scope change.',OPEN_WORK_NOT_BOUND:'Both parties must accept the exact agreement before recording events.',OPEN_WORK_EVENT_CHAIN:'The evidence order or parent link has changed.',DEMO_PIN_MISMATCH:'This is not the agreement fingerprint you expected. Nothing has been loaded.',DEMO_EVIDENCE_CHANGED:'Included evidence text does not match its signed hash. Nothing has been loaded.',DEMO_VIEW_ONLY:'This record is view-only here. Its signing keys were not exported; verify or share the public record instead.',DEMO_NO_CHANGE:'Change the price, work or deadline before proposing a revision. The existing agreement is unchanged.',DEMO_DEADLINE:'Choose a future UTC deadline.',DEMO_SELECTED_UNKNOWN:'The selected agreement is not included.',INPUT_LIMIT:'Keep an imported record below 512 KB.',CONTENT_LIMIT:'Keep each evidence note below 32 KB.',DUPLICATE_KEY:'This JSON repeats a field name. Request an unambiguous export.',NONINTEGER_NUMBER:'Amounts and timestamps must be exact integers.',DEMO_STORAGE_LIMIT:'This small demo keeps up to 16 versions and 128 evidence items. Export and start a new demo for more.'};
 function notice(text,error=false){nodes.message.textContent=text;nodes.message.classList.toggle('error',error);}
 function problem(error){const code=error.code||error.name||'DEMO_OPERATION_FAILED';notice((code==='NotSupportedError'?'This browser does not support the required Ed25519 signing. Try a current browser over HTTPS or localhost.':friendly[code]||'The record or input was refused. Check its exact fields and signatures; your prior record is unchanged.')+'\n'+code,true);}
 async function run(fn){if(busy)return;busy=true;document.documentElement.setAttribute('aria-busy','true');try{await fn();}catch(error){problem(error);}finally{busy=false;document.documentElement.removeAttribute('aria-busy');await render();}}
 const selected=()=>state.orders.find(order=>order.id===state.selected)||null;
+const changedDraft=order=>!!order&&(nodes.task.value!==order.body.terms.task||String(Number(nodes.quantity.value))!==String(order.body.terms.quantity)||nodes.deadline.value!==new Date(order.body.terms.deadline*1000).toISOString().slice(0,16));
 const who=role=>{P.need(state.roles?.[role]?.private,'DEMO_VIEW_ONLY');return state.roles[role];};
 const stamp=value=>new Date(value*1000).toISOString().replace('.000Z',' UTC').replace('T',' ');
 const short=value=>value.slice(0,10)+'…'+value.slice(-8);
 function para(parent,text,cls=''){const p=document.createElement('p');p.textContent=text;if(cls)p.className=cls;parent.append(p);return p;}
 function setForm(order){nodes.task.value=order.body.terms.task;nodes.quantity.value=String(order.body.terms.quantity);nodes.deadline.value=new Date(order.body.terms.deadline*1000).toISOString().slice(0,16);}
 function invalidateExport(){prepared=null;nodes['export-output'].value='';nodes.download.disabled=true;}
-async function fresh(){const roles={customer:await P.identity(),provider:await P.identity()};backup=state.roles||state.orders.length?state:null;state={roles,orders:[],selected:null,evidence:new Map(),imported:false};nodes.task.value='Produce a research report on battery recycling. Include three publicly cited sources, a one-page summary, and a table comparing costs. Delivery is a claim; the customer reviews quality separately.';nodes.quantity.value='90';nodes.deadline.value=new Date(Date.now()+86400000).toISOString().slice(0,16);nodes['include-content'].checked=false;invalidateExport();nodes['tamper-result'].hidden=true;notice('Ready. Create an offer as the customer, then accept it as the provider. You control both demo roles; neither is a real autonomous agent.');}
+async function fresh(){const roles={customer:await P.identity(),provider:await P.identity()};backup=state.roles||state.orders.length?state:null;state={roles,orders:[],selected:null,evidence:new Map(),imported:false};draftBackup=null;const first=example('report');nodes.task.value=first.task;nodes.quantity.value=String(first.quantity);nodes.evidence.value=first.evidence;nodes.deadline.value=new Date(Date.now()+86400000).toISOString().slice(0,16);nodes['include-content'].checked=false;invalidateExport();nodes['tamper-result'].hidden=true;notice('Ready. Choose a starting example or write your own exact work. Create an offer as the customer, then accept it as the provider. You control both synthetic roles.');}
 async function render(){
- const order=selected(),info=order?await P.inspect(order,order.id):null;const own=!!state.roles?.customer?.private&&!!state.roles?.provider?.private;
+ const order=selected(),info=order?await P.inspect(order,order.id):null;const own=!!state.roles?.customer?.private&&!!state.roles?.provider?.private,changed=changedDraft(order);
  nodes.undo.hidden=!backup;
+ nodes['restore-draft'].hidden=!draftBackup;
+ for(const button of document.querySelectorAll('[data-example]'))button.disabled=!own;
+ nodes['copy-fingerprint'].disabled=!order;nodes['copy-record'].disabled=!order;
+ nodes['next-action'].textContent=!order?'Next: create and sign one exact offer.':!own?'Next: this is a read-only imported record. Verify its independent fingerprint or share its public copy.':changed?'Next: these draft changes are unsigned. Propose a changed version and obtain fresh acceptance, or restore the prior draft fields. The selected signed record is unchanged.':info.status!=='BOUND'?'Next: review every term, then accept as the provider. Delivery actions stay disabled until both roles sign.':order.events.some(e=>e.body.action==='DISPUTE')?'Next: the dispute is retained. This demo does not decide it or move funds; carry the evidence to the separately agreed procedure.':order.events.length?'Next: inspect the evidence and export a portable record. Evidence acknowledgement is not a quality finding or payment.':'Next: record the provider delivery claim, or export the accepted agreement. Payment and quality remain unverified.';
  nodes['customer-key'].textContent=order?short(order.body.customer):state.roles?short(state.roles.customer.public):'—';nodes['provider-key'].textContent=order?short(order.body.provider):state.roles?short(state.roles.provider.public):'—';
  nodes.mode.textContent=order?'Revision '+(state.orders.indexOf(order)+1):'New agreement';
  nodes.propose.textContent=order?'Propose changed terms · customer':'Create and sign offer · customer';nodes.propose.disabled=!own||state.orders.length>=16;
- nodes.accept.disabled=!own||!order||info.approved.includes(order.body.provider);nodes.tamper.disabled=!order||order.assents.length===0;
- const bound=info?.status==='BOUND';for(const id of ['deliver','dispute','receipt'])nodes[id].disabled=!own||!bound||order.events.length>=128;
+ nodes.accept.disabled=!own||!order||changed||info.approved.includes(order.body.provider);nodes.tamper.disabled=!order||order.assents.length===0;
+ const bound=info?.status==='BOUND';for(const id of ['deliver','dispute','receipt'])nodes[id].disabled=!own||!bound||changed||order.events.length>=128;
  nodes.export.disabled=!order;
  nodes['signed-status'].textContent=!order?'No agreement yet':bound?'Both parties signed':info.approved.length===1?'Customer signed · provider pending':'Awaiting signatures';
  nodes.review.replaceChildren();
@@ -71,9 +77,28 @@ nodes['import-file'].addEventListener('change',()=>run(async()=>{const file=node
 nodes.import.addEventListener('click',()=>run(async()=>{
  const bundle=P.parseJSON(nodes['import-json'].value),pin=nodes['expected-id'].value.trim();if(pin)P.need(/^[0-9a-f]{64}$/.test(pin),'OPEN_WORK_HASH');const checked=await P.verifyBundle(bundle,{expectedId:pin||null});
  backup=state;const own=state.roles,order=bundle.agreements.find(x=>x.id===bundle.selected),keep=own&&order.body.customer===own.customer.public&&order.body.provider===own.provider.public;
- state={roles:keep?own:null,orders:structuredClone(bundle.agreements),selected:bundle.selected,evidence:new Map(bundle.evidence.map(item=>[item.sha256,item.text])),imported:true};setForm(order);invalidateExport();nodes['tamper-result'].hidden=true;
+ state={roles:keep?own:null,orders:structuredClone(bundle.agreements),selected:bundle.selected,evidence:new Map(bundle.evidence.map(item=>[item.sha256,item.text])),imported:true};draftBackup=null;setForm(order);invalidateExport();nodes['tamper-result'].hidden=true;
  const note='Verified '+checked.results.length+' agreement version(s), signatures and event links. '+(pin?'The selected fingerprint matches your independent pin. ':'No independent fingerprint supplied; identity and latest status are not established. ')+(keep?'Original signing keys remain in this tab.':'Read-only import: no private signing keys were carried.');nodes['import-result'].textContent=note;notice(note);
 }));
+for(const button of document.querySelectorAll('[data-example]'))button.addEventListener('click',()=>run(async()=>{
+ const chosen=example(button.dataset.example);
+ draftBackup={task:nodes.task.value,quantity:nodes.quantity.value,evidence:nodes.evidence.value};
+ nodes.task.value=chosen.task;nodes.quantity.value=String(chosen.quantity);nodes.evidence.value=chosen.evidence;
+ notice('Example filled the draft fields only. Existing signed versions and evidence are unchanged. '+(selected()?'Propose a changed version and obtain fresh provider acceptance.':'Create an exact offer when ready.')+' Restore previous draft fields is available.');
+}));
+for(const field of [nodes.task,nodes.quantity,nodes.deadline])field.addEventListener('input',()=>{void render().catch(problem);});
+nodes['restore-draft'].addEventListener('click',()=>run(async()=>{
+ if(!draftBackup)return;
+ const current={task:nodes.task.value,quantity:nodes.quantity.value,evidence:nodes.evidence.value};
+ nodes.task.value=draftBackup.task;nodes.quantity.value=draftBackup.quantity;nodes.evidence.value=draftBackup.evidence;draftBackup=current;
+ notice('Previous draft fields restored. Signed agreements and event records were not changed.');
+}));
+async function copyText(text,element,label){
+ try{if(!navigator.clipboard?.writeText)throw Error('COPY_UNAVAILABLE');await navigator.clipboard.writeText(text);notice(label+' copied. Sharing is a separate disclosure; no command was run and no private signing key was copied.');}
+ catch{if(element.select){element.focus();element.select();}else{const range=document.createRange();range.selectNodeContents(element);const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);}notice(label+' selected. Copy it manually. Nothing was sent.');}
+}
+nodes['copy-fingerprint'].addEventListener('click',()=>run(async()=>{if(selected())await copyText(selected().id,nodes.fingerprint,'Agreement fingerprint');}));
+nodes['copy-record'].addEventListener('click',()=>run(async()=>{await prepare();await copyText(prepared,nodes['export-output'],'Public agreement JSON');}));
 nodes.reset.addEventListener('click',()=>run(fresh));nodes.undo.addEventListener('click',()=>run(async()=>{P.need(backup,'DEMO_NO_UNDO');const current=state;state=backup;backup=current;nodes['tamper-result'].hidden=true;if(selected())setForm(selected());else{nodes.quantity.value='90';nodes.deadline.value=new Date(Date.now()+86400000).toISOString().slice(0,16);}invalidateExport();notice('Previous local session restored. No signatures were rewritten.');}));
 async function start(){if(!globalThis.isSecureContext||!globalThis.crypto?.subtle){notice('Local signing needs HTTPS or localhost with WebCrypto. Run python3 run_demo.py and open the printed localhost URL.',true);return;}try{await run(fresh);}catch(error){problem(error);}}
 start();

@@ -1,0 +1,8 @@
+test_other_files_and_dns_rebinding_are_refused (test_server.DemoHTTPTests.test_other_files_and_dns_rebinding_are_refused) ... ok
+test_public_assets_contain_no_network_clients_or_browser_storage (test_server.DemoHTTPTests.test_public_assets_contain_no_network_clients_or_browser_storage) ... ok
+test_real_page_and_modules_are_served_without_network_apis (test_server.DemoHTTPTests.test_real_page_and_modules_are_served_without_network_apis) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.511s
+
+OK

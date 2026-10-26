@@ -1,0 +1,20 @@
+✔ human examples are inert valid terms; editing a chosen form cannot mutate a preset (67.569625ms)
+✔ a signed offer is not bound until separate provider acceptance (25.788167ms)
+✔ changed price cannot retain the identifier or the previous signatures (22.863459ms)
+✔ a revision binds its parent and needs new acceptance while old evidence remains intact (36.383291ms)
+✔ delivery, receipt and dispute have ordered signed links with role checks (65.861458ms)
+✔ a bundle is portable public data; evidence is optional and independently checked (41.825958ms)
+✔ import parsing refuses duplicate keys, fractional numbers, oversized and nested payloads (0.349917ms)
+✔ byte framing is canonical with numeric-looking keys, quotes, slashes, booleans and null (0.090917ms)
+✔ malicious authority claims, foreign keys and extra signed fields fail closed (16.221416ms)
+✔ browser-generated records verify in the actual Python reference (134.734417ms)
+✔ actual Python-generated signed records verify with browser WebCrypto (79.755958ms)
+✔ a separate command-line process verifies an exported record and refuses wrong pins and edits (136.058417ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 673.119666
